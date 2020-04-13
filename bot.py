@@ -26,10 +26,9 @@ approved_egging_words = ['egg', 'huevo', 'tamago', 'たまご', '卵']
 
 @client.event
 async def on_message(message):
-	global egging
+	global egging, prefix, approved_egging_words
 	if message.author == client.user:
 		return
-	
 	
 	msg = message.content
 	if msg[:len(prefix)] != prefix or len(msg) <= len(prefix):
@@ -40,14 +39,17 @@ async def on_message(message):
 	if msg[0] in approved_egging_words:
 		if egging:
 			return
-		else:
-			egging = True
-		print(message.author.display_name + " started un huevo.")
+		elif len(message.author.voice.channel) >= 2:
+        mav = message.author.voice
+        elif mav != None:
+            if len(mav.channel) >= 2:
+                egging = True
+                print(message.author.display_name + " started un huevo.")
 
 
 @client.event
 async def on_voice_state_update(member, before, after):
-	global egging
+	global egging, members_in_vc 
 	if egging:
 		if after.channel == None:
 			channelPeople = before.channel.members
