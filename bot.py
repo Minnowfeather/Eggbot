@@ -1,26 +1,23 @@
+# bot.py
+
 import discord
 import json
 import datetime
+from threading import Timer
+
 
 tokenReader = open("token.txt", "r")
 token = tokenReader.read()
 
+
 client = discord.Client()
-
-egging = False
-
-def removePrefix(text, prefix):
-	if text.startswith(prefix):
-		return text[len(prefix):]
-	return text
-
-
 @client.event
 async def on_ready():
 	print('Logged in as {0.user}'.format(client))
 	# client.loop.create_task(checkTime())
 
 
+egging = False
 prefix = '!'
 approved_egging_words = ['egg', 'huevo', 'tamago', 'たまご', '卵']
 
@@ -44,7 +41,10 @@ async def on_message(message):
 		if mav != None:
 			if len(mav.channel.members) >= 2:
 				egging = True
+                t = Timer(10.0, lambda: egging = False)
+                t.start()
 				print(message.author.display_name + " started un huevo.")
+
 
 @client.event
 async def on_voice_state_update(member, before, after):
@@ -56,6 +56,8 @@ async def on_voice_state_update(member, before, after):
 				channel = client.get_channel(671538516005748750)
 				await channel.send("{} egg" .format(channelPeople[0].mention)) 
 				egging = False
+
+
 
 	
 client.run(token)
