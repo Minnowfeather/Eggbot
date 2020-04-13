@@ -39,7 +39,7 @@ async def on_message(message):
 	if msg[0] in approved_egging_words:
 		if egging:
 			return
-		elif len(message.author.voice.channel) >= 2:
+		# elif len(message.author.voice.channel) >= 2:
         mav = message.author.voice
         elif mav != None:
             if len(mav.channel) >= 2:
