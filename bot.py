@@ -40,12 +40,11 @@ async def on_message(message):
 		if egging:
 			return
 		# elif len(message.author.voice.channel) >= 2:
-        mav = message.author.voice
-        elif mav != None:
-            if len(mav.channel.members) >= 2:
-                egging = True
-                print(message.author.display_name + " started un huevo.")
-
+		mav = message.author.voice
+		if mav != None:
+			if len(mav.channel.members) >= 2:
+				egging = True
+				print(message.author.display_name + " started un huevo.")
 
 @client.event
 async def on_voice_state_update(member, before, after):
