@@ -42,7 +42,7 @@ async def on_message(message):
 			return
 		else:
 			egging = True
-		print(message.author.display_name + " started an egg.")
+		print(message.author.display_name + " started un huevo.")
 
 
 @client.event
