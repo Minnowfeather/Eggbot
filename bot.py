@@ -21,6 +21,12 @@ egging = False
 prefix = '!'
 approved_egging_words = ['egg', 'huevo', 'tamago', 'たまご', '卵']
 
+def stopEgging():
+	global egging
+	print("Egging stopped")
+	egging = False
+
+
 @client.event
 async def on_message(message):
 	global egging, prefix, approved_egging_words
@@ -38,11 +44,11 @@ async def on_message(message):
 			return
 		# elif len(message.author.voice.channel) >= 2:
 		mav = message.author.voice
-		if mav != None:
+		if mav != None and message.channel == client.get_channel(671538516005748750):
 			if len(mav.channel.members) >= 2:
 				egging = True
-                t = Timer(10.0, lambda: egging = False)
-                t.start()
+				t = Timer(10.0, stopEgging)
+				t.start()
 				print(message.author.display_name + " started un huevo.")
 
 
