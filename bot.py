@@ -42,7 +42,7 @@ async def on_message(message):
 		# elif len(message.author.voice.channel) >= 2:
         mav = message.author.voice
         elif mav != None:
-            if len(mav.channel) >= 2:
+            if len(mav.channel.members) >= 2:
                 egging = True
                 print(message.author.display_name + " started un huevo.")
 
